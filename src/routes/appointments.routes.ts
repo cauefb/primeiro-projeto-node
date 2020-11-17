@@ -20,14 +20,14 @@ appointmentsRouter.get('/', async(request, response) =>{
 appointmentsRouter.post('/', async (request, response) => {
     console.log('rota appointment')
     try{
-    const { provider, date } = request.body;
+    const { provider_id, date } = request.body;
 
     const parsedDate = parseISO(date)
 
 
     const creteAppointment = new CreateAppointmentService();
 
-    const appointment = await creteAppointment.execute({date:parsedDate, provider});
+    const appointment = await creteAppointment.execute({date:parsedDate, provider_id});
 
     return response.json(appointment);
     } catch(err){
