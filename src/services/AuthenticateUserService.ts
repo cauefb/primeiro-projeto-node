@@ -4,12 +4,15 @@ import { compare } from 'bcryptjs';
 
 import User from '../models/User'
 
+import { sign } from 'jsonwebtoken'
+
 interface Request {
     email: string;
     password: string;
 }
 interface Response {
     user: User;
+    token: string;
 }
 
 class AuthenticateUserService {
@@ -28,8 +31,14 @@ class AuthenticateUserService {
             throw new Error('Incorrect email/password combination.');
         }
 
+        const token = sign({},'be1ebf659fc4d8c1403b6f55e1b8107a',{
+            subject: user.id,
+            expiresIn: '1d',
+        });
+
         return {
             user,
+            token,
         };
     }
 }
