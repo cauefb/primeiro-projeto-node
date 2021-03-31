@@ -2,7 +2,7 @@ import { startOfHour } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
 
 import Appointment from '../infra/typeorm/entities/Appointments';
-import AppointmentsRepository from '../repositories/AppointmentsRepository';
+import AppointmentsRepository from '../infra/typeorm/repositories/AppointmentsRepository';
 
 import AppError from '@shared/errors/AppError';
 
@@ -21,7 +21,7 @@ class CreateAppointmentService {
 
         const appointmentDate = startOfHour(date);
         console.log("service execute");
-        const findAppointmentInSameDate = await appointmentsRepository.findBydate(appointmentDate);
+        const findAppointmentInSameDate = await appointmentsRepository.findByDate(appointmentDate);
 
 
         if (findAppointmentInSameDate) {
